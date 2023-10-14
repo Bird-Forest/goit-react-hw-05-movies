@@ -1,27 +1,23 @@
-import React from 'react';
-import Header from 'components/Header/Header';
-// import { fetchMovies } from 'servise/api';
-import { Route, Routes } from 'react-router-dom';
-
 import HomePage from 'page/HomePage';
+import { Header, WrapLink } from 'App.styled';
 import MoviePage from 'page/MoviePage';
-import { StyledLink, WrapLink } from 'App.styled';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import MovieDetails from 'page/MovieDetails';
 
 export const App = () => {
-  // fetchMovies();
   return (
     <div>
       <Header>
         <WrapLink>
-          <StyledLink to="/" end>
-            Home
-          </StyledLink>
-          <StyledLink to="/movies">Movies</StyledLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/movies">Movies</NavLink>
         </WrapLink>
       </Header>
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviePage />} />
+        <Route path="/movies/:movieId/*" element={<MovieDetails />} />
       </Routes>
     </div>
   );
