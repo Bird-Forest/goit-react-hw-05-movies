@@ -1,8 +1,7 @@
 import React from 'react';
-// import { nanoid } from 'nanoid';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { fetchMovieDetails } from 'servise/api';
 import {
   Genre,
@@ -13,6 +12,7 @@ import {
   TitleFilm,
   WrapFilm,
   WrapInfo,
+  WrapPlus,
   WrappGeners,
 } from './MovieDetails.styled';
 
@@ -40,8 +40,6 @@ export default function MovieDetails() {
 
   if (!film) return;
   console.log(film);
-  // const genres = film.genres;
-  // console.log(genres);
   return (
     <WrapFilm id={film.id}>
       <Poster
@@ -62,6 +60,11 @@ export default function MovieDetails() {
           })}
         </WrappGeners>
       </WrapInfo>
+      <WrapPlus>
+        <NavLink to="cast">Cast</NavLink>
+        <NavLink to="reviews">Reviews</NavLink>
+        <Outlet />
+      </WrapPlus>
     </WrapFilm>
   );
 }
