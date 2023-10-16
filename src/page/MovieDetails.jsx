@@ -29,7 +29,7 @@ import { Loading } from 'components/Loader';
 export default function MovieDetails() {
   const { movieId } = useParams();
   const location = useLocation();
-  const backHref = useRef(location.state?.from ?? '/movies');
+  const backHref = useRef(location.state?.from ?? '/');
   const [film, setFilm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,6 +79,7 @@ export default function MovieDetails() {
           })}
         </WrappGeners>
       </WrapInfo>
+
       <WrapPlus>
         <WrapLinkPlus>
           <NavLink className="navigate" to="cast">
@@ -88,9 +89,9 @@ export default function MovieDetails() {
             Reviews
           </NavLink>
         </WrapLinkPlus>
-
         <Outlet />
       </WrapPlus>
+
       {isLoading && <Loading />}
     </WrapFilm>
   );

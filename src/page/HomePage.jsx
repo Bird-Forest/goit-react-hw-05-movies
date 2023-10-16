@@ -7,11 +7,12 @@ import {
   WrapHomePage,
 } from './HomePage.styled';
 import { fetchMovies } from 'servise/api';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Loading } from 'components/Loader';
 
 export default function HomePage() {
   const [trendList, setTrendList] = useState(null);
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getTrandingMovies();
@@ -43,7 +44,7 @@ export default function HomePage() {
           trendList.map(({ id, title }) => {
             return (
               <PopularMovie key={id}>
-                <Link to={`/movies/${id}`}>
+                <Link state={{ from: location }} to={`/movies/${id}`}>
                   <TitlePopMovie>{title}</TitlePopMovie>
                 </Link>
               </PopularMovie>
