@@ -11,11 +11,11 @@ export const WrapHomePage = styled.div`
 export const TitleHomePage = styled.h1`
   font-family: 'Prompt', sans-serif;
   display: block;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   color: #0e1841;
   padding-left: 20px;
-  margin: 0, 0, 20px, 0;
+  margin: 0 0 30px 0;
 `;
 export const ListPopularMovies = styled.ul`
   display: flex;
@@ -33,7 +33,7 @@ export const PopularMovie = styled.li`
 export const TitlePopMovie = styled.p`
   font-family: 'Prompt', sans-serif;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
   color: #0e1841;
   cursor: pointer;
   margin: 0;
@@ -41,6 +41,6 @@ export const TitlePopMovie = styled.p`
   &:hover,
   :focus,
   :active {
-    color: #28a8ad;
+    color: #249fa3;
   }
 `;

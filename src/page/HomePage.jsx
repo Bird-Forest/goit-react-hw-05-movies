@@ -8,9 +8,11 @@ import {
 } from './HomePage.styled';
 import { fetchMovies } from 'servise/api';
 import { Link } from 'react-router-dom';
+import { Loading } from 'components/Loader';
 
 export default function HomePage() {
   const [trendList, setTrendList] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getTrandingMovies();
     // console.log('useEffect componentDidMount');
@@ -20,14 +22,14 @@ export default function HomePage() {
   }, []);
   const getTrandingMovies = async () => {
     try {
-      //  setIsLoading(true);
+      setIsLoading(true);
       const data = await fetchMovies();
       // console.log(data);
       setTrendList(data.results);
     } catch (error) {
       // setError(error.message);
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -35,6 +37,7 @@ export default function HomePage() {
   return (
     <WrapHomePage>
       <TitleHomePage>Trending today</TitleHomePage>
+
       <ListPopularMovies>
         {showList &&
           trendList.map(({ id, title }) => {
@@ -47,6 +50,7 @@ export default function HomePage() {
             );
           })}
       </ListPopularMovies>
+      {isLoading && <Loading />}
     </WrapHomePage>
   );
 }

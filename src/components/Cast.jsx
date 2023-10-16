@@ -8,17 +8,19 @@ import {
   Profile,
   WrapCast,
 } from './Cast.styled';
+import { Loading } from './Loader';
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
 export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (!movieId) return;
     const getCast = async () => {
       try {
-        //  setIsLoading(true);
+        setIsLoading(true);
         const data = await fetchCredits(movieId);
         console.log(movieId);
         console.log(data.cast);
@@ -26,18 +28,18 @@ export default function Cast() {
       } catch (error) {
         error(error.message);
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
     getCast();
   }, [movieId]);
-  // if (!cast) return;
-  // console.log(cast);
-  const showArr = Array.isArray(cast) && cast.length;
+  if (!cast) return;
+
+  const showCast = Array.isArray(cast) && cast.length;
   return (
     <>
       <WrapCast>
-        {showArr &&
+        {showCast &&
           cast.map(({ id, profile_path, name, character }) => {
             return (
               <ItemCast key={id}>
@@ -54,20 +56,8 @@ export default function Cast() {
               </ItemCast>
             );
           })}
+        {isLoading && <Loading />}
       </WrapCast>
     </>
   );
 }
-// character;
-// id;
-// name;
-// profile_path;
-
-// <img src={
-//  movieData.poster_path ?
-//  `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`
-//  : defaultImg
-// }
-// width={250}
-// alt="poster"
-// />

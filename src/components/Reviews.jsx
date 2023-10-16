@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchReviews } from 'servise/api';
 import { Author, Content, ItemReviews, WrapReviews } from './Reviews.styled';
+import { Loading } from './Loader';
 
 export default function Reviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (!movieId) return;
     const getReviews = async () => {
       try {
-        //  setIsLoading(true);
+        setIsLoading(true);
         const data = await fetchReviews(movieId);
         console.log(movieId);
         console.log(data.results);
@@ -18,28 +20,27 @@ export default function Reviews() {
       } catch (error) {
         error(error.message);
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
     getReviews();
   }, [movieId]);
-  const showArr = Array.isArray(reviews) && reviews.length;
+  const showReviews = Array.isArray(reviews) && reviews.length;
   return (
     <>
       <WrapReviews>
-        {showArr
-          ? reviews.map(({ author, content }) => {
+        {showReviews
+          ? reviews.map(({ id, author, content }) => {
               return (
-                <ItemReviews>
+                <ItemReviews key={id}>
                   <Author>Author: {author}</Author>
                   <Content>{content}</Content>
                 </ItemReviews>
               );
             })
-          : 'Opps'}
+          : 'We dont have any for this movie'}
+        {isLoading && <Loading />}
       </WrapReviews>
     </>
   );
 }
-// author;
-// content;

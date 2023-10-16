@@ -12,19 +12,22 @@ import {
   TitleFilm,
   WrapFilm,
   WrapInfo,
+  WrapLinkPlus,
   WrapPlus,
   WrappGeners,
 } from './MovieDetails.styled';
+import { Loading } from 'components/Loader';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [film, setFilm] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!movieId) return;
     const getMovieDetails = async () => {
       try {
-        //  setIsLoading(true);
+        setIsLoading(true);
         const data = await fetchMovieDetails(movieId);
         console.log(movieId);
         console.log(data);
@@ -32,7 +35,7 @@ export default function MovieDetails() {
       } catch (error) {
         error(error.message);
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
     getMovieDetails();
@@ -48,9 +51,9 @@ export default function MovieDetails() {
       />
       <WrapInfo>
         <TitleFilm>
-          {film.title} {film.release_date}
+          {film.title} {new Date(film.release_date).getFullYear()}
         </TitleFilm>
-        <Score>User Score: {film.vote_average}'0 %'</Score>
+        <Score>User Score: {Math.ceil(film.vote_average * 10)}%</Score>
         <TitleDetails>Overview</TitleDetails>
         <TextDetails>{film.overview}</TextDetails>
         <TitleDetails>Genres</TitleDetails>
@@ -61,10 +64,18 @@ export default function MovieDetails() {
         </WrappGeners>
       </WrapInfo>
       <WrapPlus>
-        <NavLink to="cast">Cast</NavLink>
-        <NavLink to="reviews">Reviews</NavLink>
+        <WrapLinkPlus>
+          <NavLink className="navigate" to="cast">
+            Cast
+          </NavLink>
+          <NavLink className="navigate" to="reviews">
+            Reviews
+          </NavLink>
+        </WrapLinkPlus>
+
         <Outlet />
       </WrapPlus>
+      {isLoading && <Loading />}
     </WrapFilm>
   );
 }

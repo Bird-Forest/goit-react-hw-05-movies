@@ -11,21 +11,23 @@ import {
 } from './MoviePage.styled';
 import { fetchFindMovie } from 'servise/api';
 import { Link } from 'react-router-dom';
+import { Loading } from 'components/Loader';
 
 export default function MoviePage() {
   const [word, setWord] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [listByName, setListByName] = useState(null);
 
   const getMovieBySearch = async () => {
     try {
-      //  setIsLoading(true);
+      setIsLoading(true);
       const data = await fetchFindMovie(word);
       setListByName(data.results);
       console.log(data.results);
     } catch (error) {
       error(error.message);
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -66,6 +68,7 @@ export default function MoviePage() {
             );
           })}
       </ListMovieByName>
+      {isLoading && <Loading />}
     </WrapMoviePage>
   );
 }

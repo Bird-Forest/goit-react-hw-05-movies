@@ -77,7 +77,7 @@ export const MovieByName = styled.li`
 export const TitleMovie = styled.p`
   font-family: 'Prompt', sans-serif;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
   color: #0e1841;
   cursor: pointer;
   margin: 0;
