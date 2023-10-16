@@ -18,13 +18,13 @@ export async function fetchMovies() {
   }
 }
 
-export async function fetchFindMovie(word) {
+export async function fetchFindMovie(query) {
   try {
     const response = await axios.get(
       'https://api.themoviedb.org/3/search/movie',
       {
         params: {
-          query: `${word}`,
+          query: `${query}`,
           include_adult: false,
           language: 'en-US',
           page: 1,
@@ -41,7 +41,7 @@ export async function fetchFindMovie(word) {
 }
 
 export async function fetchMovieDetails(movieId) {
-  console.log(movieId);
+  // console.log(movieId);
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}`,
@@ -61,7 +61,7 @@ export async function fetchMovieDetails(movieId) {
 }
 
 export async function fetchCredits(movieId) {
-  console.log(movieId);
+  // console.log(movieId);
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}/credits`,

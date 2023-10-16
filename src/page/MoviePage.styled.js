@@ -45,19 +45,18 @@ export const BtnSearch = styled.button`
   font-weight: 400;
   padding: 0;
   cursor: pointer;
-
+  &:hover,
+  :focus {
+    background-color: #249fa3;
+  }
   .icon {
     width: 28px;
     height: 28px;
     fill: #249fa3;
-  }
-  .icon:hover,
-  .icon:focus {
-    fill: #0e1841;
-  }
-  &:hover,
-  :focus {
-    background-color: #249fa3;
+    &:hover,
+    :focus {
+      fill: #0e1841;
+    }
   }
 `;
 

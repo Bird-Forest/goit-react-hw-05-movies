@@ -1,4 +1,4 @@
-import { Container, Header, WrapLink } from 'SharedLayout.styled';
+import { Container, Header, WrapLink } from 'page/SharedLayout.styled';
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 

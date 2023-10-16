@@ -13,12 +13,46 @@ export const WrapFilm = styled.div`
   margin-left: auto;
   margin-right: auto;
 `;
+
+export const WrapPic = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 0 20px 0;
+  @media screen and (min-width: 600px) {
+    width: 400px;
+  }
+  .back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #0e1841;
+    color: #249fa3;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0 0 20px 0;
+    cursor: pointer;
+    &:hover,
+    :focus {
+      background-color: #249fa3;
+      color: #0e1841;
+    }
+  }
+`;
+
 export const Poster = styled.img`
   display: block;
   width: 300px;
   height: 450px;
   object-fit: cover;
-  margin-bottom: 20px;
+  margin: 0;
   @media screen and (min-width: 600px) {
     width: 400px;
     height: 600px;
@@ -30,6 +64,7 @@ export const WrapInfo = styled.div`
   justify-content: center;
   align-items: center;
   min-width: 320px;
+  margin: 0 0 20px 0;
   @media screen and (min-width: 600px) {
     min-width: 420px;
   }
@@ -60,7 +95,7 @@ export const Score = styled.h3`
     font-size: 28px;
   } */
 `;
-export const TitleDetails = styled.h3`
+export const TitleOverview = styled.h3`
   font-family: 'Prompt', sans-serif;
   font-size: 24px;
   font-weight: 700;
@@ -70,7 +105,7 @@ export const TitleDetails = styled.h3`
     font-size: 28px;
   } */
 `;
-export const TextDetails = styled.p`
+export const TextOverview = styled.p`
   font-family: 'Prompt', sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -81,20 +116,39 @@ export const TextDetails = styled.p`
     font-size: 20px;
   } */
 `;
+export const TitleGenres = styled.h3`
+  font-family: 'Prompt', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: #0e1841;
+  /* @media screen and (min-width: 900px) {
+    font-size: 28px;
+  } */
+`;
 export const WrappGeners = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
+  list-style: none;
   padding: 0;
   margin: 0;
+  min-width: 320px;
+  @media screen and (min-width: 600px) {
+    min-width: 420px;
+  }
+  @media screen and (min-width: 900px) {
+    width: 440px;
+  }
 `;
 export const Genre = styled.li`
   font-family: 'Prompt', sans-serif;
   font-size: 20px;
   font-weight: 400;
   padding: 0;
-  margin: 0 0 20px 0;
+  margin: 0;
 `;
 
 export const WrapPlus = styled.div`

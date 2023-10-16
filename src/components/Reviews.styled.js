@@ -9,7 +9,7 @@ export const WrapReviews = styled.ul`
   font-size: 20px;
   font-weight: 700;
   color: #0e1841;
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 0;
 
   @media screen and (min-width: 900px) {

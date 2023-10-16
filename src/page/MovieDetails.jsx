@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import { fetchMovieDetails } from 'servise/api';
 import {
   Genre,
   Poster,
   Score,
-  TextDetails,
-  TitleDetails,
+  TextOverview,
   TitleFilm,
+  TitleGenres,
+  TitleOverview,
   WrapFilm,
   WrapInfo,
   WrapLinkPlus,
+  WrapPic,
   WrapPlus,
   WrappGeners,
 } from './MovieDetails.styled';
@@ -20,6 +28,8 @@ import { Loading } from 'components/Loader';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
+  const location = useLocation();
+  const backHref = useRef(location.state?.from ?? '/movies');
   const [film, setFilm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,18 +55,24 @@ export default function MovieDetails() {
   console.log(film);
   return (
     <WrapFilm id={film.id}>
-      <Poster
-        src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-        alt="poster"
-      />
+      <WrapPic>
+        <Link to={backHref.current} className="back">
+          Go Back
+        </Link>
+        <Poster
+          src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
+          alt="poster"
+        />
+      </WrapPic>
+
       <WrapInfo>
         <TitleFilm>
           {film.title} {new Date(film.release_date).getFullYear()}
         </TitleFilm>
         <Score>User Score: {Math.ceil(film.vote_average * 10)}%</Score>
-        <TitleDetails>Overview</TitleDetails>
-        <TextDetails>{film.overview}</TextDetails>
-        <TitleDetails>Genres</TitleDetails>
+        <TitleOverview>Overview</TitleOverview>
+        <TextOverview>{film.overview}</TextOverview>
+        <TitleGenres>Genres</TitleGenres>
         <WrappGeners>
           {film.genres.map(({ id, name }) => {
             return <Genre key={id}>{name}</Genre>;

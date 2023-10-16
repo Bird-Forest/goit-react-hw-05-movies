@@ -5,7 +5,7 @@ export const WrapCast = styled.ul`
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 0;
 
   @media screen and (min-width: 900px) {

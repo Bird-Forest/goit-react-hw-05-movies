@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillCameraReelsFill } from 'react-icons/bs';
 import {
   BtnSearch,
@@ -10,34 +10,38 @@ import {
   WrapMoviePage,
 } from './MoviePage.styled';
 import { fetchFindMovie } from 'servise/api';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Loading } from 'components/Loader';
 
 export default function MoviePage() {
-  const [word, setWord] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query');
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [listByName, setListByName] = useState(null);
 
-  const getMovieBySearch = async () => {
-    try {
-      setIsLoading(true);
-      const data = await fetchFindMovie(word);
-      setListByName(data.results);
-      console.log(data.results);
-    } catch (error) {
-      error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  useEffect(() => {
+    if (!query) return;
+    const getMovieBySearch = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchFindMovie(query);
+        setListByName(data.results);
+        // console.log(data.results);
+      } catch (error) {
+        error(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getMovieBySearch();
+  }, [query]);
 
   const selectedSearch = event => {
     event.preventDefault();
-    let choosedWord = word;
-    console.log(choosedWord);
-    getMovieBySearch(choosedWord);
-
-    setWord('');
+    const wordValue = event.currentTarget.elements.word.value;
+    setSearchParams({ query: wordValue });
+    event.currentTarget.reset();
   };
   const showList = Array.isArray(listByName) && listByName.length;
   return (
@@ -47,9 +51,8 @@ export default function MoviePage() {
           type="text"
           autoComplete="off"
           autoFocus
-          value={word}
+          name="word"
           placeholder="Search..."
-          onChange={event => setWord(event.target.value)}
         />
         <BtnSearch type="submit">
           <BsFillCameraReelsFill className="icon" />
@@ -61,7 +64,7 @@ export default function MoviePage() {
           listByName.map(({ id, title }) => {
             return (
               <MovieByName key={id}>
-                <Link to={`/movies/${id}`}>
+                <Link state={{ from: location }} to={`/movies/${id}`}>
                   <TitleMovie>{title}</TitleMovie>
                 </Link>
               </MovieByName>
