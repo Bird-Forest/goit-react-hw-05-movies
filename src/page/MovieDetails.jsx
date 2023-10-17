@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {
@@ -55,6 +55,7 @@ export default function MovieDetails() {
   console.log(film);
   return (
     <WrapFilm id={film.id}>
+      {isLoading && <Loading />}
       <WrapPic>
         <Link to={backHref.current} className="back">
           Go Back
@@ -89,10 +90,11 @@ export default function MovieDetails() {
             Reviews
           </NavLink>
         </WrapLinkPlus>
-        <Outlet />
-      </WrapPlus>
 
-      {isLoading && <Loading />}
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
+      </WrapPlus>
     </WrapFilm>
   );
 }

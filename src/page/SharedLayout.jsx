@@ -1,6 +1,7 @@
 import { Container, Header, WrapLink } from 'page/SharedLayout.styled';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { Loading } from 'components/Loader';
 
 export default function SharedLayout() {
   return (
@@ -15,8 +16,9 @@ export default function SharedLayout() {
           </NavLink>
         </WrapLink>
       </Header>
-
-      <Outlet />
+      <Suspense fallback={<Loading />}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 }

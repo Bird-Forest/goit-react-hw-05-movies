@@ -38,6 +38,7 @@ export default function Cast() {
   const showCast = Array.isArray(cast) && cast.length;
   return (
     <>
+      {isLoading && <Loading />}
       <WrapCast>
         {showCast &&
           cast.map(({ id, profile_path, name, character }) => {
@@ -56,7 +57,6 @@ export default function Cast() {
               </ItemCast>
             );
           })}
-        {isLoading && <Loading />}
       </WrapCast>
     </>
   );

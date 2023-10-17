@@ -37,8 +37,8 @@ export default function HomePage() {
   const showList = Array.isArray(trendList) && trendList.length;
   return (
     <WrapHomePage>
+      {isLoading && <Loading />}
       <TitleHomePage>Trending today</TitleHomePage>
-
       <ListPopularMovies>
         {showList &&
           trendList.map(({ id, title }) => {
@@ -51,7 +51,6 @@ export default function HomePage() {
             );
           })}
       </ListPopularMovies>
-      {isLoading && <Loading />}
     </WrapHomePage>
   );
 }

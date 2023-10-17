@@ -28,6 +28,7 @@ export default function Reviews() {
   const showReviews = Array.isArray(reviews) && reviews.length;
   return (
     <>
+      {isLoading && <Loading />}
       <WrapReviews>
         {showReviews
           ? reviews.map(({ id, author, content }) => {
@@ -39,7 +40,6 @@ export default function Reviews() {
               );
             })
           : 'We dont have any for this movie'}
-        {isLoading && <Loading />}
       </WrapReviews>
     </>
   );

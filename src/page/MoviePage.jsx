@@ -58,7 +58,7 @@ export default function MoviePage() {
           <BsFillCameraReelsFill className="icon" />
         </BtnSearch>
       </FormSearch>
-
+      {isLoading && <Loading />}
       <ListMovieByName>
         {showList &&
           listByName.map(({ id, title }) => {
@@ -71,7 +71,6 @@ export default function MoviePage() {
             );
           })}
       </ListMovieByName>
-      {isLoading && <Loading />}
     </WrapMoviePage>
   );
 }
