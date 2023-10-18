@@ -174,8 +174,13 @@ export const WrapLinkPlus = styled.nav`
     color: #0e1841;
     text-decoration: none;
     transition: all 0.3s;
+    cursor: pointer;
 
     &.active {
+      color: #249fa3;
+    }
+    &:hover,
+    :focus {
       color: #249fa3;
     }
   }
